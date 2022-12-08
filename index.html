@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<title>TaskManagementApp</title>
+</head>
+<body>
+	<div id="app">
+		<div class="container-fluid">
+			<div class="row m-4">
+				<div class="col-auto">
+					<button class="btn btn-primary" v-on:click="addTaskGroup">タスクグループの追加</button>
+				</div>
+			</div>
+			<div class="row flex-wrap">
+				<div class="col-3 py-4 border" v-for="(taskGroup, index) in taskGroups" v-bind:key="'taskGroup-' + index">
+					<div class="mb-3">
+						<input type="text" class="form-control" placeholder="グループ名を入力" v-model="taskGroup.name">
+						<div class="text-right mt-2">
+							<button class="btn btn-sm btn-danger" v-on:click="deleteTaskGroup(index)">このタスクグループを削除</button>
+						</div>
+					</div>
+					<div class="bg-white rounded">
+						<div class="item p-3" v-for="(task, index2) in taskGroup.tasks" v-bind:key="'task-' + index2">
+							<textarea class="form-control" style="height: 100px;" v-model="task.name" placeholder="タスクを入力"></textarea>
+							<div class="text-right mt-2">
+								<button class="btn btn-sm btn-danger" v-on:click="deleteTask(taskGroup.tasks, index2)">このタスクを削除</button>
+							</div>
+						</div>
+					</div>
+					<div class="p-3">
+						<button class="btn btn-secondary w-100" v-on:click="addTask(taskGroup)">タスクの追加</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://unpkg.com/vue@3.0.0/dist/vue.global.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>
